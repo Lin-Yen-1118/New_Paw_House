@@ -1,6 +1,6 @@
 <template>
   <Nav></Nav>
-    <router-view v-slot="{ Component }">
+  <router-view v-slot="{ Component }">
     <Transition name="fade" mode="out-in" appear :key="$route.path">
       <Layout>
         <component :is="Component" />
@@ -9,7 +9,6 @@
   </router-view>
 </template>
 <script setup lang="ts">
-import Layout from './layout/Layout.vue';
-import Nav from './components/Nav/index.vue';
+import Layout from "./layout/Layout.vue";
+import Nav from "./components/Nav/index.vue";
 </script>
-
