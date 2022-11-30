@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full w-full flex justify-around items-center">
+  <div class="h-full w-full flex justify-around items-center sticky top-0 z-2">
     <div class="relative">
       <router-link to="/"> </router-link>
       <img class="logo" :src="logoImg" />
