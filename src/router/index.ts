@@ -35,29 +35,48 @@ const routes: Array<RouteRecordRaw> = [
       title: '關於我們',
     },
   },
+  // {
+  //   path: '/adopt',
+  //   name: 'adopt',
+  //   redirect: 'adopt-info',
+  //   children: [
+  //     {
+  //       path: '/adopt-info',
+  //       name: 'adopt-info',
+  //       component: () => import('../views/adopt-info/index.vue'),
+  //       meta: {
+  //         title: '認養須知',
+  //       },
+  //     },
+  //     {
+  //       path: '/adopt-animals',
+  //       name: 'adopt-animals',
+  //       component: () => import('../views/adopt-animals/index.vue'),
+  //       meta: {
+  //         title: '認養動物',
+  //       },
+  //     },
+  //   ],
+  // },
+
   {
-    path: '/adopt',
-    name: 'adopt',
-    redirect: 'adopt-info',
-    children: [
-      {
-        path: '/adopt-info',
-        name: 'adopt-info',
-        component: () => import('../views/adopt-info/index.vue'),
-        meta: {
-          title: '認養須知',
-        },
-      },
-      {
-        path: '/adopt-animals',
-        name: 'adopt-animals',
-        component: () => import('../views/adopt-animals/index.vue'),
-        meta: {
-          title: '認養動物',
-        },
-      },
-    ],
+    path: '/adopt-info',
+    name: 'adopt-info',
+    component: () => import('../views/adopt-info/index.vue'),
+    meta: {
+      title: '認養須知',
+    },
   },
+
+  {
+    path: '/adopt-animals',
+    name: 'adopt-animals',
+    component: () => import('../views/adopt-animals/index.vue'),
+    meta: {
+      title: '認養動物',
+    },
+  },
+
   {
     path: '/room',
     name: 'room',
@@ -99,7 +118,6 @@ const router: Router = createRouter({
 router.beforeEach((to, from, next) => {
   if (to.meta.title) {
     document.title = '盼窩 | ' + to.meta.title;
-    console.log('#', to.meta.title);
   }
   next();
 });

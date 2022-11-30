@@ -12,13 +12,18 @@
         @click="getChildMenu(items.routePath)"
       >
         <img :src="getImgUrl(items.imgurl)" :alt="items.title" />
-        <div class="flex ml-5px">
+        <div class="flex ml-5px cursor-pointer">
           {{ items.title }}
           <div v-show="items.routePath === ''">
-            <div class="arrow"></div>
+            <div
+              class="arrow"
+              :class="defaultChildStatus === true ? 'rotate' : ''"
+            ></div>
           </div>
         </div>
-        <router-link :to="{ path: `/${items.routePath}` }"> </router-link>
+        <template v-if="items.routePath !== ''">
+          <router-link :to="{ path: `/${items.routePath}` }"> </router-link>
+        </template>
 
         <div
           class="absolute top-10"
@@ -27,7 +32,7 @@
           <div
             v-for="childsItems in items.children"
             :key="childsItems.id"
-            class="relative top-0px left-30px p-5px pt-2 pb-2 bg-white"
+            class="relative top-0px left-30px p-10px pt-2 pb-2 bg-white"
           >
             <div v-show="childsItems !== undefined" class="flex">
               {{ childsItems.title }}
@@ -142,10 +147,39 @@ img {
   height: 0;
   border-style: solid;
   border-width: 6px 0 6px 10px;
-  position: relative;
-  top: 30%;
-  left: 10px;
+  position: absolute;
+  top: 12px;
+  right: -15px;
   border-color: transparent transparent transparent #000000;
   transform: rotate(90deg);
+}
+.rotate {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 6px 0 6px 10px;
+  position: absolute;
+  top: 12px;
+  right: -15px;
+  border-color: transparent transparent transparent #000000;
+  transform: rotate(270deg);
+  text-align: center;
+  animation-name: rotate;
+  animation-duration: 0.3s;
+  animation-direction: alternate-reverse;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(90deg);
+    border-color: transparent transparent transparent rgb(59, 48, 7);
+  }
+  50% {
+    transform: rotate(180deg);
+    border-color: transparent transparent transparent rgb(137, 120, 48);
+  }
+  100% {
+    transform: rotate(270deg);
+    border-color: transparent transparent transparent rgb(221, 198, 102);
+  }
 }
 </style>
