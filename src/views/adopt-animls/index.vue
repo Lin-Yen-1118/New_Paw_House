@@ -1,1 +1,0 @@
-<template>adopt animals</template>
