@@ -26,18 +26,23 @@
         </template>
 
         <div
-          class="absolute top-10"
+          class="absolute top-10 z-50"
           :class="defaultChildStatus === true ? '' : 'hidden'"
         >
           <div
             v-for="childsItems in items.children"
             :key="childsItems.id"
             class="relative top-0px left-30px p-10px pt-2 pb-2 bg-white"
+            @click="toggleMenu(childsItems.routePath)"
           >
-            <div v-show="childsItems !== undefined" class="flex">
+            <template v-if="$route.path === childsItems.routePath">
+              ####
+            </template>
+            <div v-if="childsItems !== undefined" class="flex">
               {{ childsItems.title }}
             </div>
-            <router-link :to="{ path: `/${childsItems.routePath}` }">
+
+            <router-link :to="{ path: `${childsItems.routePath}` }">
             </router-link>
           </div>
         </div>
@@ -82,35 +87,43 @@ const buttonsArr = reactive([
       {
         id: 'adoptInfo',
         title: '認養須知',
-        routePath: 'adopt-info',
+        routePath: '/adopt-info',
       },
       {
         id: 'adoptDogs',
         title: '認養狗狗',
-        routePath: 'adopt-animals',
+        routePath: '/adopt-animals',
       },
       {
         id: 'adoptCats',
         title: '認養貓貓',
-        routePath: 'adopt-animals',
+        routePath: '/adopt-animals',
       },
       {
         id: 'adoptRabbits',
         title: '認養兔兔',
-        routePath: 'adopt-animals',
+        routePath: '/adopt-animals',
       },
       {
         id: 'adoptRodents',
         title: '認養鼠鼠',
-        routePath: 'adopt-animals',
+        routePath: '/adopt-animals',
       },
     ],
   },
   {
     id: 'room',
     title: '住宿相關',
-    routePath: 'room',
+    routePath: '',
     imgurl: '../../assets/images/svg/rabbit01',
+    children: [
+      { id: 'room', title: '一般住宿', routePath: 'room' },
+      {
+        id: 'petAccommodation',
+        title: '毛孩寄宿',
+        routePath: '/pet_accommodation',
+      },
+    ],
   },
   {
     id: 'products',
@@ -132,6 +145,10 @@ const getChildMenu = (items: string) => {
     defaultChildStatus.value = false;
   }
 };
+
+function toggleMenu(v: string) {
+  console.log('!!!', v);
+}
 </script>
 <style scoped>
 img {

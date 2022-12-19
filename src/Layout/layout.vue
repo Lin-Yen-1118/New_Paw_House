@@ -1,11 +1,11 @@
 <template>
-  <div class="p-10px bg-blue-500/50">
+  <div class="">
     <slot slot="default"></slot>
   </div>
 </template>
 <script lang="ts">
 export default {
-  name: "Layout",
+  name: 'Layout',
   component: {},
   inheritAttrs: false,
 };

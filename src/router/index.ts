@@ -67,7 +67,6 @@ const routes: Array<RouteRecordRaw> = [
       title: '認養須知',
     },
   },
-
   {
     path: '/adopt-animals',
     name: 'adopt-animals',
@@ -76,13 +75,20 @@ const routes: Array<RouteRecordRaw> = [
       title: '認養動物',
     },
   },
-
   {
     path: '/room',
     name: 'room',
     component: () => import('../views/room/index.vue'),
     meta: {
-      title: '住宿相關',
+      title: '一般住宿',
+    },
+  },
+  {
+    path: '/pet_accommodation',
+    name: 'pet-accommodation',
+    component: () => import('../views/room/index.vue'),
+    meta: {
+      title: '毛孩寄宿',
     },
   },
   {
