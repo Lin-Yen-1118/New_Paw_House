@@ -8,10 +8,10 @@
       <div
         v-for="items in buttonsArr"
         :key="items.id"
-        class="m-10px flex relative"
+        class="custom_active m-10px flex relative cursor-pointer select-none"
         @click="getChildMenu(items.routePath)"
       >
-        <img :src="getImgUrl(items.imgurl)" :alt="items.title" />
+        <img class="" :src="getImgUrl(items.imgurl)" :alt="items.title" />
         <div class="flex ml-5px cursor-pointer">
           {{ items.title }}
           <div v-show="items.routePath === ''">
@@ -180,6 +180,23 @@ img {
   100% {
     transform: rotate(270deg);
     border-color: transparent transparent transparent rgb(221, 198, 102);
+  }
+}
+
+.custom_active:hover {
+  color: #6a5412;
+}
+
+.custom_active:hover > img {
+  animation: rotateImg 2s infinite;
+  transform-origin: 50% 50%;
+}
+@keyframes rotateImg {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 </style>

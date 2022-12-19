@@ -15,7 +15,7 @@ import Nav from './components/Nav/index.vue';
 <style>
 @font-face {
   font-family: 'Noto sans TC';
-  src: local('Noto sans TC'), url(./font/NotoSansCJKtc-Regular.otf);
+  src: local('Noto sans TC'), url(./font/NotoSansTC-Regular.otf);
 }
 
 a {
