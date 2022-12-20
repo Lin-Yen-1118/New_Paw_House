@@ -1,15 +1,19 @@
 <template>
-  <div class="h-full w-full flex justify-around items-center sticky top-0 z-2">
+  <div
+    class="h-full w-full flex justify-around items-center sticky top-0 z-2"
+    style="background-color: rgba(255, 255, 255, 0.7)"
+  >
     <div class="relative">
       <router-link to="/"> </router-link>
       <img class="logo" :src="logoImg" />
     </div>
-    <div class="w-3/5 flex justify-around items-center text-2xl">
+    <!-- 這邊的 ref="target" 為用來做收合subMenu (用法來源:https://vueuse.org/core/onclickoutside/#demo)-->
+    <div ref="target" class="w-3/5 flex justify-around items-center text-2xl">
       <div
-        v-for="items in buttonsArr"
+        v-for="items in MenuArr"
         :key="items.id"
         class="custom_active m-10px flex relative cursor-pointer select-none"
-        @click="getChildMenu(items.routePath)"
+        @click="getSubMenu(items.id)"
       >
         <img class="" :src="getImgUrl(items.imgurl)" :alt="items.title" />
         <div class="flex ml-5px cursor-pointer">
@@ -17,7 +21,7 @@
           <div v-show="items.routePath === ''">
             <div
               class="arrow"
-              :class="defaultChildStatus === true ? 'rotate' : ''"
+              :class="currentSubMenu === items.id ? 'rotate' : ''"
             ></div>
           </div>
         </div>
@@ -25,24 +29,26 @@
           <router-link :to="{ path: `/${items.routePath}` }"> </router-link>
         </template>
 
+        <!-- 下拉選單 -->
+
         <div
           class="absolute top-10 z-50"
-          :class="defaultChildStatus === true ? '' : 'hidden'"
+          :class="
+            currentSubMenu === items.id && defaultSubMenuStatus === true
+              ? ''
+              : 'hidden'
+          "
         >
           <div
-            v-for="childsItems in items.children"
-            :key="childsItems.id"
-            class="relative top-0px left-30px p-10px pt-2 pb-2 bg-white"
-            @click="toggleMenu(childsItems.routePath)"
+            v-for="subMenuItems in items.subMenu"
+            :key="subMenuItems.id"
+            class="relative top-0px left-40px p-10px pt-2 pb-2 bg-white"
           >
-            <template v-if="$route.path === childsItems.routePath">
-              ####
-            </template>
-            <div v-if="childsItems !== undefined" class="flex">
-              {{ childsItems.title }}
+            <div v-if="subMenuItems !== undefined" class="flex">
+              {{ subMenuItems.title }}
             </div>
 
-            <router-link :to="{ path: `${childsItems.routePath}` }">
+            <router-link :to="{ path: `${subMenuItems.routePath}` }">
             </router-link>
           </div>
         </div>
@@ -66,7 +72,9 @@ import { ref, reactive } from 'vue';
 import logoImg from '@/assets/logo.svg';
 import userImg from '@/assets/images/svg/user-circle-solid.svg';
 import cartImg from '@/assets/images/svg/shopping-cart.svg';
-const buttonsArr = reactive([
+import { onClickOutside } from '@vueuse/core';
+
+const MenuArr = reactive([
   // {
   //   id: "Home",
   //   title: "首頁",
@@ -83,7 +91,7 @@ const buttonsArr = reactive([
     title: '我要認養',
     routePath: '',
     imgurl: '../../assets/images/svg/cat01',
-    children: [
+    subMenu: [
       {
         id: 'adoptInfo',
         title: '認養須知',
@@ -116,7 +124,7 @@ const buttonsArr = reactive([
     title: '住宿相關',
     routePath: '',
     imgurl: '../../assets/images/svg/rabbit01',
-    children: [
+    subMenu: [
       { id: 'room', title: '一般住宿', routePath: 'room' },
       {
         id: 'petAccommodation',
@@ -137,18 +145,23 @@ const getImgUrl = (img: string) => {
   return new URL(`${img}.svg`, import.meta.url).href;
 };
 
-let defaultChildStatus = ref(false);
-const getChildMenu = (items: string) => {
-  if (items === '') {
-    defaultChildStatus.value = !defaultChildStatus.value;
-  } else {
-    defaultChildStatus.value = false;
-  }
+let defaultSubMenuStatus = ref(false);
+
+const currentSubMenu = ref('');
+const getSubMenu = (items: string) => {
+  MenuArr.forEach((o) => {
+    if (o.id === items) {
+      defaultSubMenuStatus.value = true;
+      currentSubMenu.value = items;
+    }
+  });
 };
 
-function toggleMenu(v: string) {
-  console.log('!!!', v);
-}
+//當子選單失去焦點，就收起來
+const target = ref(null);
+onClickOutside(target, (event) => {
+  defaultSubMenuStatus.value = false;
+});
 </script>
 <style scoped>
 img {
