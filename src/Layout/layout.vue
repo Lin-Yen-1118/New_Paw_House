@@ -1,9 +1,5 @@
 <template>
-<<<<<<< HEAD
   <div class="">
-=======
-  <div class="p-10px">
->>>>>>> origin/feature
     <slot slot="default"></slot>
   </div>
 </template>
