@@ -114,7 +114,7 @@
     >
       協助毛孩生活更美好
     </div>
-    <div class="flex justify-center">
+    <div class="flex justify-center h-490px">
       <div class="cursor-pointer relative h-320px pl-10px pr-10px">
         <img class="w-110 h-75" :src="foodAidImg" alt="" />
         <router-link to="/products"> </router-link>
@@ -156,7 +156,7 @@ import hamsterRoomImg from '@/assets/images/pet_accommodation/09.jpg';
 import foodAidImg from '@/assets/images/bg/food_aid.jpg';
 import volunteerImg from '@/assets/images/bg/volunteer.jpg';
 </script>
-<style>
+<style scoped>
 .bg {
   background-image: url(@/assets/images/bg/01.jpg);
   width: 100%;

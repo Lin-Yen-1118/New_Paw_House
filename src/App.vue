@@ -7,10 +7,12 @@
       </Layout>
     </Transition>
   </router-view>
+  <Footer></Footer>
 </template>
 <script setup lang="ts">
-import Layout from './layout/Layout.vue';
+import Layout from './Layout/layout.vue';
 import Nav from './components/Nav/index.vue';
+import Footer from './components/Footer/index.vue';
 </script>
 <style>
 @font-face {

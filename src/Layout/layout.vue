@@ -1,6 +1,8 @@
 <template>
   <div class="">
-    <slot slot="default"></slot>
+    <div class="space-for-functionBar w-full overflow-auto overflow-x-hidden">
+      <slot slot="default"></slot>
+    </div>
   </div>
 </template>
 <script lang="ts">
@@ -10,4 +12,8 @@ export default {
   inheritAttrs: false,
 };
 </script>
-<style scoped></style>
+<style scoped>
+/* .space-for-functionBar {
+  height: calc(100vh - 190px);
+} */
+</style>
