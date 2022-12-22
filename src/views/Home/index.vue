@@ -87,28 +87,64 @@
       寵物寄宿服務
     </div>
     <div class="flex justify-center items-center">
-      <div class="hover_blur cursor-pointer relative">
-        <img class="w-60 h-90" :src="dogRoomImg" alt="" />
-        <router-link to="/room"> </router-link>
+      <div class="pet_room cursor-pointer relative">
+        <div class="hover_blur">
+          <img class="w-60 h-90" :src="dogRoomImg" alt="" />
+          <router-link to="/room"> </router-link>
+        </div>
+        <div
+          class="pet_room_items absolute top-0 left-0 w-full h-full flex justify-center items-center"
+        >
+          狗狗寄宿
+        </div>
       </div>
-      <div class="hover_blur cursor-pointer relative">
-        <img class="w-60 h-90" :src="catRoomImg" alt="" />
-        <router-link to="/room"> </router-link>
+      <div class="pet_room cursor-pointer relative">
+        <div class="hover_blur">
+          <img class="w-60 h-90" :src="catRoomImg" alt="" />
+          <router-link to="/room"> </router-link>
+        </div>
+        <div
+          class="pet_room_items absolute top-0 left-0 w-full h-full flex justify-center items-center"
+        >
+          貓貓寄宿
+        </div>
       </div>
-      <div class="hover_blur cursor-pointer relative">
-        <img class="w-60 h-90" :src="rabbitRoomImg" alt="" />
-        <router-link to="/room"> </router-link>
+
+      <div class="pet_room cursor-pointer relative">
+        <div class="hover_blur">
+          <img class="w-60 h-90" :src="rabbitRoomImg" alt="" />
+          <router-link to="/room"> </router-link>
+        </div>
+        <div
+          class="pet_room_items absolute top-0 left-0 w-full h-full flex justify-center items-center"
+        >
+          兔兔寄宿
+        </div>
       </div>
-      <div class="hover_blur cursor-pointer relative">
-        <img class="w-60 h-90" :src="guineaPigRoomImg" alt="" />
-        <router-link to="/room"> </router-link>
+
+      <div class="pet_room cursor-pointer relative">
+        <div class="hover_blur">
+          <img class="w-60 h-90" :src="guineaPigRoomImg" alt="" />
+          <router-link to="/room"> </router-link>
+        </div>
+        <div
+          class="pet_room_items absolute top-0 left-0 w-full h-full flex justify-center items-center"
+        >
+          天竺鼠寄宿
+        </div>
       </div>
-      <div class="hover_blur cursor-pointer relative">
-        <img class="w-60 h-90" :src="hamsterRoomImg" alt="" />
-        <router-link to="/room"> </router-link>
+      <div class="pet_room cursor-pointer relative">
+        <div class="hover_blur">
+          <img class="w-60 h-90" :src="hamsterRoomImg" alt="" />
+          <router-link to="/room"> </router-link>
+        </div>
+        <div
+          class="pet_room_items absolute top-0 left-0 w-full h-full flex justify-center items-center"
+        >
+          倉鼠寄宿
+        </div>
       </div>
     </div>
-
     <div
       class="flex justify-center items-center w-full text-2xl font-medium pt-20px p-20px"
     >
@@ -230,5 +266,23 @@ import volunteerImg from '@/assets/images/bg/volunteer.jpg';
 }
 .hover_blur:hover {
   filter: none;
+}
+.pet_room_items {
+  display: none;
+}
+.pet_room > .pet_room_items {
+  display: flex;
+  animation: pet-room;
+  animation-duration: 3s;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+}
+@keyframes pet-room {
+  0% {
+    height: 10px;
+  }
+  100% {
+    height: 100%;
+  }
 }
 </style>
