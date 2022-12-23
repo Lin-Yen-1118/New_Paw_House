@@ -93,7 +93,7 @@
           <router-link to="/room"> </router-link>
         </div>
         <div
-          class="pet_room_items absolute top-0 left-0 w-full h-full flex justify-center items-center"
+          class="pet_room_items absolute top-0 left-0 w-full h-full flex justify-center items-end"
         >
           狗狗寄宿
         </div>
@@ -104,7 +104,7 @@
           <router-link to="/room"> </router-link>
         </div>
         <div
-          class="pet_room_items absolute top-0 left-0 w-full h-full flex justify-center items-center"
+          class="pet_room_items absolute top-0 left-0 w-full h-full flex justify-center items-end"
         >
           貓貓寄宿
         </div>
@@ -116,7 +116,7 @@
           <router-link to="/room"> </router-link>
         </div>
         <div
-          class="pet_room_items absolute top-0 left-0 w-full h-full flex justify-center items-center"
+          class="pet_room_items absolute top-0 left-0 w-full h-full flex justify-center items-end"
         >
           兔兔寄宿
         </div>
@@ -128,7 +128,7 @@
           <router-link to="/room"> </router-link>
         </div>
         <div
-          class="pet_room_items absolute top-0 left-0 w-full h-full flex justify-center items-center"
+          class="pet_room_items absolute top-0 left-0 w-full h-full flex justify-center items-end"
         >
           天竺鼠寄宿
         </div>
@@ -139,7 +139,7 @@
           <router-link to="/room"> </router-link>
         </div>
         <div
-          class="pet_room_items absolute top-0 left-0 w-full h-full flex justify-center items-center"
+          class="pet_room_items absolute top-0 left-0 w-full h-full flex justify-center items-end"
         >
           倉鼠寄宿
         </div>
@@ -268,21 +268,42 @@ import volunteerImg from '@/assets/images/bg/volunteer.jpg';
   filter: none;
 }
 .pet_room_items {
-  display: none;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #fff;
+  padding-bottom: 10px;
+  font-size: 22px;
 }
+
 .pet_room > .pet_room_items {
-  display: flex;
-  animation: pet-room;
+  filter: flex;
+  animation: box-down;
   animation-duration: 3s;
   animation-direction: alternate;
   animation-iteration-count: 1;
 }
-@keyframes pet-room {
+@keyframes box-down {
   0% {
     height: 10px;
   }
   100% {
     height: 100%;
+  }
+}
+
+.pet_room:hover > .pet_room_items {
+  filter: flex;
+  animation: box-up;
+  animation-duration: 3s;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+}
+@keyframes box-up {
+  0% {
+    height: 100%;
+  }
+  100% {
+    height: 0%;
+    color: transparent;
   }
 }
 </style>
