@@ -10,143 +10,68 @@
   </div>
   <div class="p-10px w-full">
     <div
-      class="flex justify-center items-center w-full text-2xl font-medium p-20px"
+      class="flex justify-center items-center w-full text-2xl font-medium p-20px select-none"
     >
       等家毛孩
     </div>
     <div class="flex justify-center items-center w-full">
-      <div class="cursor-pointer relative">
-        <img
-          class="up_down_animation w-60 h-60 p-5px"
-          :src="dogImg"
-          alt="dog"
-        />
-        <router-link to="/room"> </router-link>
-      </div>
-      <div class="cursor-pointer relative">
-        <img
-          class="down_up_animation w-60 h-60 p-5px"
-          :src="catImg"
-          alt="dog"
-        />
-        <router-link to="/room"> </router-link>
-      </div>
-      <div class="cursor-pointer relative">
-        <img
-          class="up_down_animation w-60 h-60 p-5px"
-          :src="rabbitImg"
-          alt="dog"
-        />
-        <router-link to="/room"> </router-link>
-      </div>
-      <div class="cursor-pointer relative">
-        <img
-          class="down_up_animation w-60 h-60 p-5px"
-          :src="hamsterImg"
-          alt="dog"
-        />
-        <router-link to="/room"> </router-link>
-      </div>
-      <div class="cursor-pointer relative">
-        <img
-          class="up_down_animation w-60 h-60 p-5px"
-          :src="guineapigImg"
-          alt="dog"
-        />
-        <router-link to="/room"> </router-link>
-      </div>
+      <template v-for="adoptItems in adoptArr" :key="adoptItems.id">
+        <div class="cursor-pointer relative">
+          <img
+            class="w-60 h-60 p-5px"
+            :class="
+              adoptItems.id === 'dog' ||
+              adoptItems.id === 'rabbit' ||
+              adoptItems.id === 'hamster'
+                ? 'up_down_animation'
+                : 'down_up_animation'
+            "
+            :src="adoptItems.imgUrl"
+            :alt="adoptItems.alt"
+          />
+          <router-link to="/adopt-animals"> </router-link>
+        </div>
+      </template>
     </div>
 
     <div
-      class="flex justify-center items-center w-full text-2xl font-medium pt-20px p-20px"
+      class="flex justify-center items-center w-full text-2xl font-medium pt-20px p-20px select-none"
     >
       住宿服務
     </div>
     <div class="flex justify-center items-center">
-      <div class="hover_blur cursor-pointer relative">
-        <img class="w-60 h-90" :src="room01Img" alt="" />
-        <router-link to="/room"> </router-link>
-      </div>
-      <div class="hover_blur cursor-pointer relative">
-        <img class="w-60 h-90" :src="room02Img" alt="" />
-        <router-link to="/room"> </router-link>
-      </div>
-      <div class="hover_blur cursor-pointer relative">
-        <img class="w-60 h-90" :src="room03Img" alt="" />
-        <router-link to="/room"> </router-link>
-      </div>
-      <div class="hover_blur cursor-pointer relative">
-        <img class="w-60 h-90" :src="room04Img" alt="" />
-        <router-link to="/room"> </router-link>
-      </div>
+      <template v-for="roomItems in roomArr" :key="roomItems.id">
+        <div class="hover_blur cursor-pointer relative">
+          <img class="w-60 h-90" :src="roomItems.imgUrl" :alt="roomItems.alt" />
+          <router-link to="/room"> </router-link>
+        </div>
+      </template>
     </div>
 
     <div
-      class="flex justify-center items-center w-full text-2xl font-medium pt-20px p-20px"
+      class="flex justify-center items-center w-full text-2xl font-medium pt-20px p-20px select-none"
     >
       寵物寄宿服務
     </div>
     <div class="flex justify-center items-center">
-      <div class="pet_room cursor-pointer relative">
+      <div
+        v-for="items in roomPetArr"
+        :key="items.id"
+        class="pet_room cursor-pointer relative"
+      >
         <div class="hover_blur">
-          <img class="w-60 h-90" :src="dogRoomImg" alt="" />
+          <img class="w-60 h-90" :src="items.imgUrl" :alt="items.alt" />
           <router-link to="/room"> </router-link>
         </div>
         <div
-          class="pet_room_items absolute top-0 left-0 w-full h-full flex justify-center items-end"
+          class="pet_room_items text-lg text-white absolute top-0 left-0 w-full h-full flex justify-center items-end z-1 pb-10px"
         >
-          狗狗寄宿
-        </div>
-      </div>
-      <div class="pet_room cursor-pointer relative">
-        <div class="hover_blur">
-          <img class="w-60 h-90" :src="catRoomImg" alt="" />
-          <router-link to="/room"> </router-link>
-        </div>
-        <div
-          class="pet_room_items absolute top-0 left-0 w-full h-full flex justify-center items-end"
-        >
-          貓貓寄宿
-        </div>
-      </div>
-
-      <div class="pet_room cursor-pointer relative">
-        <div class="hover_blur">
-          <img class="w-60 h-90" :src="rabbitRoomImg" alt="" />
-          <router-link to="/room"> </router-link>
-        </div>
-        <div
-          class="pet_room_items absolute top-0 left-0 w-full h-full flex justify-center items-end"
-        >
-          兔兔寄宿
-        </div>
-      </div>
-
-      <div class="pet_room cursor-pointer relative">
-        <div class="hover_blur">
-          <img class="w-60 h-90" :src="guineaPigRoomImg" alt="" />
-          <router-link to="/room"> </router-link>
-        </div>
-        <div
-          class="pet_room_items absolute top-0 left-0 w-full h-full flex justify-center items-end"
-        >
-          天竺鼠寄宿
-        </div>
-      </div>
-      <div class="pet_room cursor-pointer relative">
-        <div class="hover_blur">
-          <img class="w-60 h-90" :src="hamsterRoomImg" alt="" />
-          <router-link to="/room"> </router-link>
-        </div>
-        <div
-          class="pet_room_items absolute top-0 left-0 w-full h-full flex justify-center items-end"
-        >
-          倉鼠寄宿
+          <div class="absolute z-2 select-none">{{ items.alt }}</div>
         </div>
       </div>
     </div>
     <div
-      class="flex justify-center items-center w-full text-2xl font-medium pt-20px p-20px"
+      class="flex justify-center items-center w-full text-2xl font-medium pt-20px p-20px select-none"
     >
       協助毛孩生活更美好
     </div>
@@ -154,7 +79,7 @@
       <div class="cursor-pointer relative h-320px pl-10px pr-10px">
         <img class="w-110 h-75" :src="foodAidImg" alt="" />
         <router-link to="/products"> </router-link>
-        <div class="text-xl p-5px">助糧計畫</div>
+        <div class="text-xl p-5px select-none">助糧計畫</div>
         <div class="p-5px leading-relaxed">
           助糧，最
           <span class="text-red-500">食</span>
@@ -175,11 +100,12 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { ref, reactive } from 'vue';
 import dogImg from '@/assets/images/bg/dog.jpg';
 import catImg from '@/assets/images/bg/cat.jpg';
 import rabbitImg from '@/assets/images/bg/rabbit.jpg';
 import hamsterImg from '@/assets/images/bg/hamster.jpg';
-import guineapigImg from '@/assets/images/bg/guineapig.jpg';
+import guineaPigImg from '@/assets/images/bg/guineapig.jpg';
 import room01Img from '@/assets/images/room/room26.jpg';
 import room02Img from '@/assets/images/room/room24.jpg';
 import room03Img from '@/assets/images/room/room23.jpg';
@@ -191,6 +117,33 @@ import guineaPigRoomImg from '@/assets/images/pet_accommodation/06.jpg';
 import hamsterRoomImg from '@/assets/images/pet_accommodation/09.jpg';
 import foodAidImg from '@/assets/images/bg/food_aid.jpg';
 import volunteerImg from '@/assets/images/bg/volunteer.jpg';
+
+const adoptArr = reactive([
+  { id: 'dog', imgUrl: dogImg, alt: '狗狗認養' },
+  { id: 'cat', imgUrl: catImg, alt: '貓貓認養' },
+  { id: 'rabbit', imgUrl: rabbitImg, alt: '兔兔認養' },
+  { id: 'guineaPig', imgUrl: guineaPigImg, alt: '天竺鼠認養' },
+  { id: 'hamster', imgUrl: hamsterImg, alt: '倉鼠認養' },
+]);
+
+const roomArr = reactive([
+  { id: 'room01', imgUrl: room01Img, alt: '溫馨小房' },
+  { id: 'room02', imgUrl: room02Img, alt: '寬敞大房' },
+  { id: 'room03', imgUrl: room03Img, alt: '豪華家庭房' },
+  { id: 'room04', imgUrl: room04Img, alt: '豪華家庭房' },
+]);
+
+const roomPetArr = reactive([
+  { id: 'dog', imgUrl: dogRoomImg, alt: '狗狗寄宿' },
+  { id: 'cat', imgUrl: catRoomImg, alt: '貓貓寄宿' },
+  { id: 'rabbit', imgUrl: rabbitRoomImg, alt: '兔兔寄宿' },
+  { id: 'guineaPig', imgUrl: guineaPigRoomImg, alt: '天竺鼠寄宿' },
+  { id: 'hamster', imgUrl: hamsterRoomImg, alt: '倉鼠寄宿' },
+]);
+
+function getImageUrl() {
+  return new URL(`./dir/${name}.png`, import.meta.url).href;
+}
 </script>
 <style scoped>
 .bg {
@@ -262,20 +215,22 @@ import volunteerImg from '@/assets/images/bg/volunteer.jpg';
   }
 }
 .hover_blur {
-  filter: blur(2px);
+  filter: blur(1.5px);
 }
 .hover_blur:hover {
-  filter: none;
+  filter: blur(0px);
 }
+
 .pet_room_items {
   background-color: rgba(0, 0, 0, 0.2);
-  color: #fff;
-  padding-bottom: 10px;
-  font-size: 22px;
+}
+
+.pet_room_items:hover {
+  filter: blur(0px);
 }
 
 .pet_room > .pet_room_items {
-  filter: flex;
+  display: flex;
   animation: box-down;
   animation-duration: 3s;
   animation-direction: alternate;
@@ -283,7 +238,7 @@ import volunteerImg from '@/assets/images/bg/volunteer.jpg';
 }
 @keyframes box-down {
   0% {
-    height: 10px;
+    height: 0%;
   }
   100% {
     height: 100%;
@@ -291,7 +246,7 @@ import volunteerImg from '@/assets/images/bg/volunteer.jpg';
 }
 
 .pet_room:hover > .pet_room_items {
-  filter: flex;
+  display: flex;
   animation: box-up;
   animation-duration: 3s;
   animation-direction: alternate;

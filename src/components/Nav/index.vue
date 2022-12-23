@@ -1,9 +1,9 @@
 <template>
   <div
-    class="h-full w-full flex justify-around items-center sticky top-0 z-50 select-none"
+    class="h-full w-full flex justify-between items-center sticky top-0 z-50 select-none pl-10px pr-10px"
     style="background-color: rgba(255, 255, 255, 0.7)"
   >
-    <div class="relative">
+    <div class="relative pl-10px">
       <router-link to="/"> </router-link>
       <img class="logo" :src="logoImg" />
     </div>
@@ -37,7 +37,7 @@
         <!-- 下拉選單 -->
 
         <div
-          class="absolute top-10 z-50"
+          class="sub_menu absolute top-30px z-50"
           :class="
             currentSubMenu === items.id && defaultSubMenuStatus === true
               ? ''
@@ -60,12 +60,12 @@
       </div>
     </div>
 
-    <div class="flex">
-      <div class="ml-5px mr-5px relative">
+    <div class="flex pr-10px">
+      <div class="ml-10px mr-10px relative">
         <router-link to="/user"> </router-link>
         <img :src="userImg" />
       </div>
-      <div class="ml-5px mr-5px relative">
+      <div class="ml-10px mr-10px relative">
         <router-link to="/cart"> </router-link>
         <img :src="cartImg" />
       </div>
@@ -239,5 +239,9 @@ img {
 }
 .sub_hover:hover {
   color: #6a5412;
+}
+
+.custom_active:hover > .sub_menu {
+  display: block;
 }
 </style>

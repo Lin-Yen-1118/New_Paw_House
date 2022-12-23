@@ -1,11 +1,15 @@
 <template>
   <div class="">
-    <div class="space-for-functionBar w-full overflow-auto overflow-x-hidden">
+    <div
+      class="w-full overflow-auto overflow-x-hidden"
+      :class="$route.name !== 'home' ? 'space-for-functionBar' : ''"
+    >
       <slot slot="default"></slot>
     </div>
   </div>
 </template>
 <script lang="ts">
+import VueRouter from 'vue-router';
 export default {
   name: 'Layout',
   component: {},
@@ -13,7 +17,7 @@ export default {
 };
 </script>
 <style scoped>
-/* .space-for-functionBar {
-  height: calc(100vh - 190px);
-} */
+.space-for-functionBar {
+  height: calc(100vh - 255px);
+}
 </style>

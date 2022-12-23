@@ -2,7 +2,7 @@
   <div class="h-200px flex">
     <div class="bgImg flex justify-around items-center p-10px">
       <div class="bg_filter absolute w-full h-full"></div>
-      <div class="flex justify-between p-10px leading-relaxed">
+      <div class="flex justify-between p-10px leading-relaxed w-full">
         <div class="relative w-1/3">
           <div class="drop">
             <router-link to="/"> </router-link>
@@ -28,9 +28,8 @@
           </div>
         </div>
         <div class="text-white w-1/3 text-lg relative z-2">
-          本網站為緯育TibaMe前端設計工程師班第68期學員專題作品，本平台僅供學習、展示之用。
-          參考資源:XXXXXXXXXXXXX。若有侵權疑慮，您可以私訊[TibaMe-前端設計工程師養成班]，
-          後續會由專人協助處理，連結:https://www.facebook.com/webindex/
+          本網站為個人專題作品，僅供學習、展示之用。
+          若有侵權疑慮，請寄信告知，E-mail:goatruby@gmail.com
         </div>
       </div>
     </div>
