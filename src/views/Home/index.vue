@@ -3,7 +3,7 @@
     <div class="relative w-full h-full">
       <div class="bg">
         <div class="bg_p_mask">
-          <div class="bg_p">我在盼窩等家，等你</div>
+          <div class="bg_p select-none">我在盼窩等家，等你</div>
         </div>
       </div>
     </div>

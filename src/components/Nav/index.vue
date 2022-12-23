@@ -1,6 +1,6 @@
 <template>
   <div
-    class="h-full w-full flex justify-around items-center sticky top-0 z-2"
+    class="h-full w-full flex justify-around items-center sticky top-0 z-50 select-none"
     style="background-color: rgba(255, 255, 255, 0.7)"
   >
     <div class="relative">
@@ -8,11 +8,12 @@
       <img class="logo" :src="logoImg" />
     </div>
     <!-- 這邊的 ref="target" 為用來做收合subMenu (用法來源:https://vueuse.org/core/onclickoutside/#demo)-->
-    <div ref="target" class="w-3/5 flex justify-around items-center text-2xl">
+    <div class="w-3/5 flex justify-around items-center text-2xl">
       <div
+        ref="target"
         v-for="items in MenuArr"
         :key="items.id"
-        class="custom_active m-10px flex relative cursor-pointer select-none"
+        class="custom_active m-10px flex relative cursor-pointer"
         @click="getSubMenu(items.id)"
       >
         <img class="" :src="getImgUrl(items.imgurl)" :alt="items.title" />
@@ -21,7 +22,11 @@
           <div v-show="items.routePath === ''">
             <div
               class="arrow"
-              :class="currentSubMenu === items.id ? 'rotate' : ''"
+              :class="
+                currentSubMenu === items.id && defaultSubMenuStatus === true
+                  ? 'rotate'
+                  : ''
+              "
             ></div>
           </div>
         </div>
@@ -42,7 +47,7 @@
           <div
             v-for="subMenuItems in items.subMenu"
             :key="subMenuItems.id"
-            class="relative top-0px left-40px p-10px pt-2 pb-2 bg-white"
+            class="sub_hover relative top-0px left-40px p-10px pt-2 pb-2 bg-white"
           >
             <div v-if="subMenuItems !== undefined" class="flex">
               {{ subMenuItems.title }}
@@ -228,5 +233,11 @@ img {
   100% {
     transform: rotate(360deg);
   }
+}
+.sub_hover {
+  color: #000000;
+}
+.sub_hover:hover {
+  color: #6a5412;
 }
 </style>
