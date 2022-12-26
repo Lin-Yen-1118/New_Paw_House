@@ -1,5 +1,5 @@
 <template>
-  <div class="h-200px flex">
+  <!-- <div class="h-200px flex">
     <div class="bgImg flex justify-around items-center p-10px">
       <div class="bg_filter absolute w-full h-full"></div>
       <div class="flex justify-between p-10px leading-relaxed w-full">
@@ -33,7 +33,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 <script lang="ts" setup>
 import logoImg from '@/assets/logo.svg';

@@ -18,6 +18,6 @@ export default {
 </script>
 <style scoped>
 .space-for-functionBar {
-  height: calc(100vh - 255px);
+  /* height: calc(100vh - 255px); */
 }
 </style>
