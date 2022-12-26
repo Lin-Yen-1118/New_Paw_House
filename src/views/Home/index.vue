@@ -14,7 +14,7 @@
     >
       等家毛孩
     </div>
-    <div class="flex justify-center items-center w-full">
+    <div class="flex justify-center items-center w-full flex-wrap">
       <template v-for="adoptItems in adoptArr" :key="adoptItems.id">
         <div class="cursor-pointer relative">
           <img
@@ -42,7 +42,11 @@
     <div class="flex justify-center items-center">
       <template v-for="roomItems in roomArr" :key="roomItems.id">
         <div class="hover_blur cursor-pointer relative">
-          <img class="w-60 h-90" :src="roomItems.imgUrl" :alt="roomItems.alt" />
+          <img
+            class="w-60 h-90 <xl:(h-auto)"
+            :src="roomItems.imgUrl"
+            :alt="roomItems.alt"
+          />
           <router-link to="/room"> </router-link>
         </div>
       </template>
@@ -60,7 +64,11 @@
         class="pet_room cursor-pointer relative"
       >
         <div class="hover_blur">
-          <img class="w-60 h-90" :src="items.imgUrl" :alt="items.alt" />
+          <img
+            class="w-60 h-90 <xl:(h-auto)"
+            :src="items.imgUrl"
+            :alt="items.alt"
+          />
           <router-link to="/room"> </router-link>
         </div>
         <div
@@ -77,17 +85,15 @@
     </div>
     <div class="flex justify-center h-490px">
       <div class="cursor-pointer relative h-320px pl-10px pr-10px">
-        <img class="w-110 h-75" :src="foodAidImg" alt="" />
+        <img class="w-110 h-75 <xl:(h-auto)" :src="foodAidImg" alt="" />
         <router-link to="/products"> </router-link>
         <div class="text-xl p-5px select-none">助糧計畫</div>
         <div class="p-5px leading-relaxed">
-          助糧，最
-          <span class="text-red-500">食</span>
-          在的幫助
+          助糧，最<span class="text-red-500">食</span>在的幫助
         </div>
       </div>
       <div class="cursor-pointer relative h-320px pl-10px pr-10px">
-        <img class="w-110 h-75" :src="volunteerImg" alt="" />
+        <img class="w-110 h-75 <xl:(h-auto)" :src="volunteerImg" alt="" />
         <router-link to="/room"> </router-link>
         <div class="text-xl p-5px">小小志工</div>
         <div class="p-5px leading-relaxed">
@@ -153,7 +159,7 @@ function getImageUrl() {
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  background-position: 100% 80%;
+  background-position: center;
   background-attachment: fixed;
 }
 .bg_p_mask {
@@ -217,6 +223,7 @@ function getImageUrl() {
 .hover_blur {
   filter: blur(1.5px);
 }
+
 .hover_blur:hover {
   filter: blur(0px);
 }
@@ -259,6 +266,13 @@ function getImageUrl() {
   100% {
     height: 0%;
     color: transparent;
+  }
+}
+
+/* RWD */
+@media (max-width: 1023.9px) {
+  .hover_blur {
+    filter: none;
   }
 }
 </style>

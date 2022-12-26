@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div
-      class="w-full overflow-auto overflow-x-hidden"
+      class="w-full overflow-auto overflow-x-hidden <xl:(mt-56px)"
       :class="$route.name !== 'home' ? 'space-for-functionBar' : ''"
     >
       <slot slot="default"></slot>

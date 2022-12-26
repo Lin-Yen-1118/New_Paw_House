@@ -1,14 +1,24 @@
 <template>
   <div
-    class="h-full w-full flex justify-between items-center sticky top-0 z-50 select-none pl-10px pr-10px"
+    class="h-full w-full flex justify-between items-center sticky top-0 z-50 select-none pl-10px pr-10px <xl:(fixed h-60px )"
     style="background-color: rgba(255, 255, 255, 0.7)"
   >
+    <!-- hamburger menu -->
+    <!-- <div
+      class="hidden <xl:(flex flex-col relative p-10px)"
+      @click="toggleHamburgerMenu()"
+    >
+      <div class="bg-black relative m-4px w-20px h-3px rounded-lg"></div>
+      <div class="bg-black relative m-4px w-30px h-3px rounded-lg"></div>
+      <div class="bg-black relative m-4px w-20px h-3px rounded-lg"></div>
+    </div> -->
+
     <div class="relative pl-10px">
       <router-link to="/"> </router-link>
       <img class="logo" :src="logoImg" />
     </div>
     <!-- 這邊的 ref="target" 為用來做收合subMenu (用法來源:https://vueuse.org/core/onclickoutside/#demo)-->
-    <div class="w-3/5 flex justify-around items-center text-2xl">
+    <div class="w-3/5 flex justify-around items-center text-2xl <xl:(hidden)">
       <div
         ref="target"
         v-for="items in MenuArr"
@@ -68,6 +78,45 @@
       <div class="ml-10px mr-10px relative">
         <router-link to="/cart"> </router-link>
         <img :src="cartImg" />
+      </div>
+    </div>
+  </div>
+
+  <!-- mobile menu -->
+  <div
+    class="hidden <xl:(sticky z-50 top-53px left-0 w-full h-100px bg-white shadow-lg flex justify-around items-center overflow-x-scroll p-10px)"
+  >
+    <div
+      ref="target"
+      v-for="items in HamburgerMenuArr"
+      :key="items.id"
+      @click="getSubMenu(items.id)"
+      class="custom_active m-10px flex-nowrap flex items-center w-full h-full relative cursor-pointer"
+    >
+      <div
+        class="flex justify-center items-center relative"
+        style="width: 100%; height: 100%"
+      >
+        <div
+          class="flex ml-5px cursor-pointer"
+          :class="$route.name === items.routePath ? 'current_line' : ''"
+        >
+          {{ items.title }}
+          <div v-show="items.routePath === ''">
+            <div
+              class=""
+              :class="
+                currentSubMenu === items.id && defaultSubMenuStatus === true
+                  ? ''
+                  : ''
+              "
+            ></div>
+          </div>
+        </div>
+
+        <template v-if="items.routePath !== ''">
+          <router-link :to="{ path: `/${items.routePath}` }"> </router-link>
+        </template>
       </div>
     </div>
   </div>
@@ -146,6 +195,71 @@ const MenuArr = reactive([
   },
 ]);
 
+const HamburgerMenuArr = reactive([
+  {
+    id: 'Home',
+    title: '首頁',
+    routePath: 'home',
+  },
+  {
+    id: 'about',
+    title: '關於我們',
+    routePath: 'about',
+  },
+  {
+    id: 'adopt',
+    title: '我要認養',
+    routePath: '',
+
+    subMenu: [
+      {
+        id: 'adoptInfo',
+        title: '認養須知',
+        routePath: '/adopt-info',
+      },
+      {
+        id: 'adoptDogs',
+        title: '認養狗狗',
+        routePath: '/adopt-animals',
+      },
+      {
+        id: 'adoptCats',
+        title: '認養貓貓',
+        routePath: '/adopt-animals',
+      },
+      {
+        id: 'adoptRabbits',
+        title: '認養兔兔',
+        routePath: '/adopt-animals',
+      },
+      {
+        id: 'adoptRodents',
+        title: '認養鼠鼠',
+        routePath: '/adopt-animals',
+      },
+    ],
+  },
+  {
+    id: 'room',
+    title: '住宿相關',
+    routePath: '',
+
+    subMenu: [
+      { id: 'room', title: '一般住宿', routePath: 'room' },
+      {
+        id: 'petAccommodation',
+        title: '毛孩寄宿',
+        routePath: '/pet_accommodation',
+      },
+    ],
+  },
+  {
+    id: 'products',
+    title: '周邊商品',
+    routePath: 'products',
+  },
+]);
+
 const getImgUrl = (img: string) => {
   return new URL(`${img}.svg`, import.meta.url).href;
 };
@@ -160,6 +274,17 @@ const getSubMenu = (items: string) => {
       currentSubMenu.value = items;
     }
   });
+
+  if (HamburgerMenuArr) {
+    HamburgerMenuArr.forEach((o) => {
+      if (o.id === items) {
+        console.log(o.id, 'o.id');
+        defaultSubMenuStatus.value = true;
+        currentSubMenu.value = items;
+        console.log(currentSubMenu.value);
+      }
+    });
+  }
 };
 
 //當子選單失去焦點，就收起來
@@ -167,6 +292,12 @@ const target = ref(null);
 onClickOutside(target, (event) => {
   defaultSubMenuStatus.value = false;
 });
+
+const burgerMenuStatus = ref(false);
+function toggleHamburgerMenu() {
+  burgerMenuStatus.value = !burgerMenuStatus.value;
+  console.log(burgerMenuStatus.value, '###');
+}
 </script>
 <style scoped>
 img {
@@ -243,5 +374,8 @@ img {
 
 .custom_active:hover > .sub_menu {
   display: block;
+}
+.current_line {
+  border-bottom: 3px solid rgb(240, 57, 88);
 }
 </style>

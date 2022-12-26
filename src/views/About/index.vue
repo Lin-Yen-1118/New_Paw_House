@@ -1,16 +1,30 @@
 <template>
   <div class="parallax w-full relative">
     <div class="relative top-0 left-0 w-full h-full">
-      <div class="drop w-350px h-350px absolute top-50px left-60 p-30px">
-        核心理念
-        本館創於西元2020年11月份，旨在幫助流浪的毛孩尋找好歸宿，歡迎大家來預約互動，尋找屬於自己的緣分
+      <div
+        class="drop w-280px h-280px absolute p-30px flex flex-col"
+        style="position: absolute; left: 5%; top: 3%"
+      >
+        <div class="text-lg font-black leading-loose">核心理念</div>
+        <div>
+          本館創於西元2020年11月份，旨在幫助流浪的毛孩尋找好歸宿，歡迎大家來預約互動，尋找屬於自己的緣分
+        </div>
       </div>
-      <div class="drop w-290px h-290px absolute top-150px left-350 p-30px">
-        營運的經費來源 收入來源分別為:住宿收入占50%、助糧計畫30%、周邊產品20%
+      <div
+        class="drop w-250px h-250px absolute p-30px flex flex-col"
+        style="position: absolute; right: 15%; top: 10%"
+      >
+        <div class="text-lg font-black leading-loose">營運的經費來源</div>
+        <div>收入來源分別為:住宿收入占50%、助糧計畫30%、周邊產品20%</div>
       </div>
-      <div class="drop w-300px h-300px absolute top-200px left-140 p-30px">
-        困難點
-        時常收到一些網友的求援訊息，在資源有限情況下只能盡己所能幫忙，願流浪動物的問題在大家努力下能獲得改善。
+      <div
+        class="drop w-310px h-310px absolute p-30px flex flex-col"
+        style="position: absolute; left: 20%; top: 27%"
+      >
+        <div class="text-lg font-black leading-loose">困難點</div>
+        <div>
+          時常收到一些網友的求援訊息，在資源有限情況下只能盡己所能幫忙，願流浪動物的問題在大家努力下能獲得改善。
+        </div>
       </div>
     </div>
   </div>
@@ -19,11 +33,11 @@
 .parallax {
   background-image: url(@/assets/images/bg/dog01.png);
   width: 100%;
-  height: 1800px;
+  height: 1200px;
   background-repeat: no-repeat;
   background-size: contain;
   position: relative;
-  background-position: 50% 50%;
+  background-position: center;
   background-attachment: fixed;
   background-color: #eeeef0;
 }
