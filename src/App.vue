@@ -29,4 +29,7 @@ a {
   cursor: pointer;
   z-index: 10;
 }
+body {
+  background-color: #f4f0eb;
+}
 </style>

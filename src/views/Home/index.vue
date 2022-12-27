@@ -155,17 +155,17 @@ function getImageUrl() {
 .bg {
   background-image: url(@/assets/images/bg/01.jpg);
   width: 100%;
-  height: 1200px;
+  height: 1000px;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  background-position: center;
+  background-position: 50% 75%;
   background-attachment: fixed;
 }
 .bg_p_mask {
   position: absolute;
-  top: 200px;
-  left: 150px;
+  top: 180px;
+  left: 110px;
 }
 .bg_p {
   font-size: 28px;

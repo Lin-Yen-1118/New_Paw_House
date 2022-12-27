@@ -1,24 +1,21 @@
 <template>
   <div
-    class="h-full w-full flex justify-between items-center sticky top-0 z-50 select-none pl-10px pr-10px <xl:(fixed h-60px )"
-    style="background-color: rgba(255, 255, 255, 0.7)"
+    class="h-60px w-full flex justify-between items-center sticky top-0 z-50 select-none pl-10px pr-10px shadow-lg"
+    style="background-color: rgba(255, 255, 255, 1)"
   >
-    <!-- hamburger menu -->
-    <!-- <div
-      class="hidden <xl:(flex flex-col relative p-10px)"
-      @click="toggleHamburgerMenu()"
-    >
-      <div class="bg-black relative m-4px w-20px h-3px rounded-lg"></div>
-      <div class="bg-black relative m-4px w-30px h-3px rounded-lg"></div>
-      <div class="bg-black relative m-4px w-20px h-3px rounded-lg"></div>
-    </div> -->
-
     <div class="relative pl-10px">
       <router-link to="/"> </router-link>
       <img class="logo" :src="logoImg" />
     </div>
     <!-- 這邊的 ref="target" 為用來做收合subMenu (用法來源:https://vueuse.org/core/onclickoutside/#demo)-->
-    <div class="w-3/5 flex justify-around items-center text-2xl <xl:(hidden)">
+
+    <div class="flex w-full <xl:(hidden)">
+      <Menu></Menu>
+    </div>
+
+    <div
+      class="hidden w-3/5 flex justify-around items-center text-2xl <xl:(hidden)"
+    >
       <div
         ref="target"
         v-for="items in MenuArr"
@@ -83,42 +80,9 @@
   </div>
 
   <!-- mobile menu -->
-  <div
-    class="hidden <xl:(sticky z-50 top-53px left-0 w-full h-100px bg-white shadow-lg flex justify-around items-center overflow-x-scroll p-10px)"
-  >
-    <div
-      ref="target"
-      v-for="items in HamburgerMenuArr"
-      :key="items.id"
-      @click="getSubMenu(items.id)"
-      class="custom_active m-10px flex-nowrap flex items-center w-full h-full relative cursor-pointer"
-    >
-      <div
-        class="flex justify-center items-center relative"
-        style="width: 100%; height: 100%"
-      >
-        <div
-          class="flex ml-5px cursor-pointer"
-          :class="$route.name === items.routePath ? 'current_line' : ''"
-        >
-          {{ items.title }}
-          <div v-show="items.routePath === ''">
-            <div
-              class=""
-              :class="
-                currentSubMenu === items.id && defaultSubMenuStatus === true
-                  ? ''
-                  : ''
-              "
-            ></div>
-          </div>
-        </div>
 
-        <template v-if="items.routePath !== ''">
-          <router-link :to="{ path: `/${items.routePath}` }"> </router-link>
-        </template>
-      </div>
-    </div>
+  <div class="hidden <xl:(flex w-full)">
+    <Menu></Menu>
   </div>
 </template>
 <script lang="ts" setup>
@@ -127,6 +91,7 @@ import logoImg from '@/assets/logo.svg';
 import userImg from '@/assets/images/svg/user-circle-solid.svg';
 import cartImg from '@/assets/images/svg/shopping-cart.svg';
 import { onClickOutside } from '@vueuse/core';
+import Menu from '@/components/Menu/index.vue';
 
 const MenuArr = reactive([
   // {
@@ -208,8 +173,8 @@ const HamburgerMenuArr = reactive([
   },
   {
     id: 'adopt',
-    title: '我要認養',
-    routePath: '',
+    title: '認養',
+    routePath: 'adopt-animals',
 
     subMenu: [
       {
@@ -241,8 +206,8 @@ const HamburgerMenuArr = reactive([
   },
   {
     id: 'room',
-    title: '住宿相關',
-    routePath: '',
+    title: '住宿',
+    routePath: 'room',
 
     subMenu: [
       { id: 'room', title: '一般住宿', routePath: 'room' },
@@ -255,7 +220,7 @@ const HamburgerMenuArr = reactive([
   },
   {
     id: 'products',
-    title: '周邊商品',
+    title: '商品',
     routePath: 'products',
   },
 ]);
@@ -305,8 +270,8 @@ img {
   height: 35px;
 }
 .logo {
-  width: 72px;
-  height: auto;
+  width: 65px;
+  height: 60px;
 }
 .arrow {
   width: 0;
@@ -375,7 +340,11 @@ img {
 .custom_active:hover > .sub_menu {
   display: block;
 }
-.current_line {
+.current_route {
   border-bottom: 3px solid rgb(240, 57, 88);
+  color: #000000;
+}
+.not_current_route {
+  color: #767474;
 }
 </style>
