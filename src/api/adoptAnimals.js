@@ -1,8 +1,8 @@
 import service from '@/utils/request';
 
-export function getAdoptAnimalsData(value) {
+export function getAdoptAnimalsData() {
   return service({
-    url: `${import.meta.env.VITE_BASE_URL}/${value}`,
+    url: `${import.meta.env.VITE_BASE_URL}/adoptAnimals`,
     method: 'get',
     // params: query,
   });

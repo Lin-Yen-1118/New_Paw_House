@@ -11,9 +11,79 @@
         @update:value="handleUpdateValue"
       />
     </div>
-    <div class="mt-80px fixed top-130px w-full h-full p-10px">
-      <div class="bg-white h-800px w-full p-10px rounded-md overflow-y-scroll">
-        {{ selectAdoptAnimalsData }}
+    <div class="mt-80px fixed top-130px w-full h-700px p-10px overflow-y-auto">
+      <div
+        class="bg-white w-full p-10px rounded-md flex justify-start flex-wrap"
+      >
+        <div
+          v-for="adoptItems in filterAdoptAnimalsData"
+          :key="adoptItems.id"
+          class="m-10px"
+        >
+          <Card :adopt-info="adoptItems">
+            <template #img>
+              <img
+                :src="getImageUrl(adoptItems)"
+                alt=""
+                class="w-260px h-180px"
+              />
+            </template>
+            <template #name>
+              <div class="flex">
+                <div>小名:&nbsp;</div>
+                <div>
+                  {{ adoptItems.name }}
+                </div>
+              </div>
+            </template>
+
+            <template #entry-date>
+              <div class="flex">
+                <div>入園時間:&nbsp;</div>
+                <div>{{ adoptItems.entryDate }}</div>
+              </div>
+            </template>
+            <template #sex>
+              <div class="flex">
+                <div>性別:&nbsp;</div>
+                <div>
+                  <template v-if="adoptItems.sex === '1'">公</template>
+                  <template v-if="adoptItems.sex === '2'">母 </template>
+                </div>
+              </div>
+            </template>
+            <template #age>
+              <div class="flex">
+                <div>年齡:&nbsp;</div>
+                <div>{{ adoptItems.age }}&nbsp;歲</div>
+              </div>
+            </template>
+            <template #birth-control-status>
+              <div class="flex">
+                <div>節育狀態:&nbsp;</div>
+                <div>
+                  {{ adoptItems.birthControlStatus }}
+                </div>
+              </div>
+            </template>
+            <template #health-status>
+              <div class="flex">
+                <div>健康狀態:&nbsp;</div>
+                <div>
+                  {{ adoptItems.healthStatus }}
+                </div>
+              </div>
+            </template>
+            <template #describe>
+              <div class="flex">
+                <div>描述:&nbsp;</div>
+                <div>
+                  {{ adoptItems.describe }}
+                </div>
+              </div>
+            </template>
+          </Card>
+        </div>
       </div>
     </div>
   </div>
@@ -22,42 +92,48 @@
 <script lang="ts" setup>
 import { ref, reactive, onMounted } from 'vue';
 import { NSelect, SelectOption } from 'naive-ui';
-import { getAdoptAnimalsData } from '@/api/adoptDogs.js';
+import { getAdoptAnimalsData } from '@/api/adoptAnimals.js';
+import Card from '@/components/Card/index.vue';
 
 const adoptTypeArr = reactive([
-  { id: 'dogs', title: '狗狗', label: '' },
-  { id: 'cats', title: '貓貓', label: '' },
-  { id: 'rabbits', title: '兔兔', label: '' },
-  { id: 'guineaPigs', title: '天竺鼠', label: '' },
-  { id: 'hamsters', title: '倉鼠', label: '' },
+  { id: 'dog', title: '狗狗', label: '' },
+  { id: 'cat', title: '貓貓', label: '' },
+  { id: 'rabbit', title: '兔兔', label: '' },
+  { id: 'guineaPig', title: '天竺鼠', label: '' },
+  { id: 'hamster', title: '倉鼠', label: '' },
 ]);
 
 const value = ref([]);
-const selectOptionAnimal = ref('cats');
-let selectAdoptAnimalsData = ref('');
+const selectOptionAnimal = ref('');
+let selectAdoptAnimalsData = reactive([]);
+let filterAdoptAnimalsData = reactive([]);
 
 function handleUpdateValue(value: string) {
   selectOptionAnimal.value = value;
-  console.log(selectOptionAnimal.value, '##');
-  selectValue(selectOptionAnimal.value, selectAdoptAnimalsData.value);
+  selectValue(selectOptionAnimal.value);
 }
 
-function selectValue(
-  selectOptionAnimal: string,
-  selectAdoptAnimalsData: string
-) {
-  console.log(selectOptionAnimal, '$$', selectAdoptAnimalsData, '###');
-  selectAdoptAnimalsData = selectAdoptAnimalsData;
+function selectValue(selectOptionAnimal: string) {
+  filterAdoptAnimalsData.length = 0;
+  selectAdoptAnimalsData.map((o) => {
+    if (o.type === selectOptionAnimal) {
+      return filterAdoptAnimalsData.push(o);
+    }
+  });
+}
+
+//取得圖片的動態路徑
+function getImageUrl(data: string) {
+  const fileFirstName = `${data.type}s`;
+  const fileSecondName = data.imgUrl;
+  return new URL(
+    `./../../assets/images/${fileFirstName}/${fileSecondName}`,
+    import.meta.url
+  ).href;
 }
 
 onMounted(async () => {
-  const adoptAnimals = await getAdoptAnimalsData(selectOptionAnimal.value);
-  console.log(selectOptionAnimal.value, '@@@');
-
-  selectAdoptAnimalsData.value = adoptAnimals;
-
-  console.log(selectAdoptAnimalsData, 'selectAdoptAnimalsData');
-
-  selectValue(selectOptionAnimal.value, adoptAnimals);
+  const adoptAnimals = await getAdoptAnimalsData();
+  selectAdoptAnimalsData = adoptAnimals.data;
 });
 </script>
