@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col justify-start items-start w-280px h-420px p-10px rounded-lg shadow-xl border"
+    class="flex flex-col justify-start items-start w-280px h-420px p-10px rounded-lg shadow-xl border bg-white"
   >
     <div><slot name="img"></slot></div>
     <div class="pt-10px leading-relaxed">
