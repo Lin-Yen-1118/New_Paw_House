@@ -3,13 +3,13 @@
     class="h-60px w-full flex justify-between items-center sticky top-0 z-50 select-none pl-10px pr-10px shadow-lg"
     style="background-color: rgba(255, 255, 255, 1)"
   >
-    <div class="relative pl-10px">
+    <div class="relative pl-10px pr-10px">
       <router-link to="/"> </router-link>
       <img class="logo" :src="logoImg" />
     </div>
     <!-- 這邊的 ref="target" 為用來做收合subMenu (用法來源:https://vueuse.org/core/onclickoutside/#demo)-->
 
-    <div class="flex w-full <xl:(hidden)">
+    <div class="flex justify-center items-center w-full <md:(hidden)">
       <Menu></Menu>
     </div>
 
@@ -81,8 +81,8 @@
 
   <!-- mobile menu -->
 
-  <div class="hidden <xl:(flex w-full)">
-    <Menu></Menu>
+  <div class="hidden <md:(flex w-full fixed top-60px z-50)">
+    <Menu :class="class"></Menu>
   </div>
 </template>
 <script lang="ts" setup>

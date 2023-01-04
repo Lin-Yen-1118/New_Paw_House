@@ -13,11 +13,11 @@
     </div>
 
     <div
-      class="mt-80px fixed top-130px flex w-full flex justify-center items-center p-10px"
+      class="mt-80px fixed top-50px flex w-full flex justify-center items-center p-10px"
     >
       <div
         class="flex justify-center items-center flex-wrap bg-white overflow-y-auto w-full p-10px pt-20px pb-20px"
-        style="height: 68vh"
+        style="height: 75vh"
       >
         <div
           class="w-full rounded-md grid auto-rows-auto gap-2 flex justify-center"

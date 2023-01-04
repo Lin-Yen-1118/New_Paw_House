@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fixed z-50 top-60px left-0 w-full h-60px bg-white shadow-lg flex justify-around items-center"
+    class="w-full z-50 h-60px bg-white flex justify-around items-center <md:(top-60px left-0 w-full shadow-lg)"
     style="border-top: 1px solid rgba(000, 000, 000, 0.1)"
   >
     <div

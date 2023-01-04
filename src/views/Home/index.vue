@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div class="relative w-full h-full">
+    <div class="relative top-0 left-0 w-full h-full">
       <div class="bg">
         <div class="bg_p_mask">
           <div class="bg_p select-none">我在盼窩等家，等你</div>
@@ -155,11 +155,15 @@ function getImageUrl() {
 .bg {
   background-image: url(@/assets/images/bg/01.jpg);
   width: 100%;
-  height: 1000px;
+  height: 1200px;
   background-repeat: no-repeat;
   background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   position: relative;
-  background-position: 50% 75%;
+  background-position: 100% 75%;
+  /* background-position: 0px 75%; */
   background-attachment: fixed;
 }
 .bg_p_mask {

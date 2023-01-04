@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div class="w-full overflow-auto overflow-x-hidden mt-60px">
+    <div class="w-full overflow-auto overflow-x-hidden <md:(mt-60px)">
       <slot slot="default"></slot>
     </div>
   </div>

@@ -1,4 +1,10 @@
 <template>
+  <Teleport to="body">
+    <Transition name="slide-fade">
+      <PopupModal :show="showModule" @isShow="toggleModule"> </PopupModal>
+    </Transition>
+  </Teleport>
+
   <div
     class="flex flex-col justify-start items-start w-280px h-420px p-10px rounded-lg shadow-xl border bg-white"
   >
@@ -15,12 +21,15 @@
       <div><slot name="describe"></slot></div>
     </div>
 
-    <div class="w-full flex justify-center p-10px pt-15px">
+    <div
+      class="w-full flex justify-center p-10px pt-15px"
+      @click="toggleModule"
+    >
       <n-button type="warning">我要認養</n-button>
     </div>
   </div>
 </template>
-<script>
+<!-- <script>
 import { NButton } from 'naive-ui';
 export default {
   name: 'Card',
@@ -32,5 +41,29 @@ export default {
     adoptInfo: { type: Object, default: [] },
   },
 };
+</script> -->
+<script lang="ts" setup>
+import { ref } from 'vue';
+import { NButton } from 'naive-ui';
+import PopupModal from '@/components/PopupModal/index.vue';
+
+export interface Props {
+  adoptInfo?: Object;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  adoptInfo: () => [],
+});
+
+//彈窗的預設狀態為關閉(false)
+let showModule = ref(false);
+//當前點擊到的卡片data
+// let currentCardData = ref({});
+//彈窗的開關
+function toggleModule() {
+  // currentCardData.value = v;
+  showModule.value = !showModule.value;
+
+  console.log('done~~~~');
+}
 </script>
->
