@@ -80,7 +80,6 @@
   </div>
 
   <!-- mobile menu -->
-
   <div class="hidden <md:(flex w-full fixed top-60px z-50)">
     <Menu :class="class"></Menu>
   </div>
