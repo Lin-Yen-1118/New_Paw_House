@@ -81,7 +81,7 @@
 
   <!-- mobile menu -->
   <div class="hidden <md:(flex w-full fixed top-60px z-50)">
-    <Menu :class="class"></Menu>
+    <Menu></Menu>
   </div>
 </template>
 <script lang="ts" setup>

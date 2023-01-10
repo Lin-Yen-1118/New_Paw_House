@@ -174,6 +174,13 @@ import { ref, reactive, onMounted } from 'vue';
 import { NSelect, SelectOption } from 'naive-ui';
 import { getAdoptAnimalsData } from '@/api/adoptAnimals.js';
 import Card from '@/components/Card/index.vue';
+import {
+  AdoptData,
+  ImageUrl,
+  SelectAdoptAnimalsData,
+  NewItems,
+  DefaultAdoptAnimalsData,
+} from '@/types/index';
 
 const adoptTypeArr = reactive([
   { id: 'all', title: '全部', label: '', value: 'all' },
@@ -186,9 +193,9 @@ const adoptTypeArr = reactive([
 
 const value = ref([]);
 const selectOptionAnimal = ref(''); //選取項目
-let selectAdoptAnimalsData = reactive([]); //依動物種類分類後的資料
+let selectAdoptAnimalsData: SelectAdoptAnimalsData = reactive([]); //依動物種類分類後的資料
 let filterAdoptAnimalsData = reactive([]); //篩選-認養動物資料
-let defaultAdoptAnimalsData = reactive([]); //初始-認養動物資料
+let defaultAdoptAnimalsData: DefaultAdoptAnimalsData = reactive([]); //初始-認養動物資料
 let defaultFilterAdoptAnimalsData = reactive([]); //初始-認養動物整理後資料
 
 function handleUpdateValue(value: string) {
@@ -199,21 +206,21 @@ function handleUpdateValue(value: string) {
 function selectValue(selectOptionAnimal: string) {
   if (selectOptionAnimal === 'all') {
     filterAdoptAnimalsData.length = 0;
-    selectAdoptAnimalsData.map((o) => {
-      return filterAdoptAnimalsData.push(o);
+    selectAdoptAnimalsData.map((o: SelectAdoptAnimalsData) => {
+      return filterAdoptAnimalsData.push(o as never);
     });
   } else {
     filterAdoptAnimalsData.length = 0;
-    selectAdoptAnimalsData.map((o) => {
+    selectAdoptAnimalsData.map((o: SelectAdoptAnimalsData) => {
       if (o.type === selectOptionAnimal) {
-        return filterAdoptAnimalsData.push(o);
+        return filterAdoptAnimalsData.push(o as never);
       }
     });
   }
 }
 
 //取得圖片的動態路徑
-function getImageUrl(data: string) {
+function getImageUrl(data: ImageUrl) {
   const fileFirstName = `${data.type}s`;
   const fileSecondName = data.imgUrl;
   return new URL(
@@ -227,6 +234,9 @@ async function getDefaultAdoptApiData() {
   try {
     defaultAdoptAnimalsData = await getAdoptAnimalsData();
     filterAdoptAnimalsData.length = 0;
+
+    console.log(defaultAdoptAnimalsData, 'defaultAdoptAnimalsData');
+
     if (defaultAdoptAnimalsData.code === 200) {
       selectedAdoptAnimalsDataFn(defaultAdoptAnimalsData.data);
     } else {
@@ -237,7 +247,7 @@ async function getDefaultAdoptApiData() {
   }
 }
 
-function selectedAdoptAnimalsDataFn(adoptData: string) {
+function selectedAdoptAnimalsDataFn(adoptData: AdoptData) {
   adoptData.map(
     ({
       id,
@@ -250,8 +260,19 @@ function selectedAdoptAnimalsDataFn(adoptData: string) {
       describe,
       healthStatus,
       imgUrl,
+    }: {
+      id: string;
+      type: string;
+      name: string;
+      entryDate: string;
+      sex: string;
+      age: string;
+      birthControlStatus: string;
+      describe: string;
+      healthStatus: string;
+      imgUrl: string;
     }) => {
-      let newItems = {
+      let newItems: NewItems = {
         id,
         type,
         name,
@@ -263,7 +284,7 @@ function selectedAdoptAnimalsDataFn(adoptData: string) {
         healthStatus,
         imgUrl,
       };
-      defaultFilterAdoptAnimalsData.push(newItems);
+      defaultFilterAdoptAnimalsData.push(newItems as never);
     }
   );
 }

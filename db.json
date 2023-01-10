@@ -4,7 +4,7 @@
   "profile": { "name": "typicode" },
   "adoptAnimals": {
     "code": 200,
-    "mag": "success",
+    "msg": "success",
     "data": [
       {
         "id": 1,

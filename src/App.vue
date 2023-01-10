@@ -29,7 +29,6 @@ const themeOverrides: GlobalThemeOverrides = {
       },
     },
   },
-  Input: {},
 };
 const theme = null;
 </script>
